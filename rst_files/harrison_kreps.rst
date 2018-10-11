@@ -243,7 +243,7 @@ The following table gives a summary of the findings obtained in the remainder of
 
 It records implications of Harrison and Kreps's specifications of :math:`P_a, P_b, \beta`
 
-.. only:: html
+.. raw:: html
 
    <div class="content-table"></div>
 
