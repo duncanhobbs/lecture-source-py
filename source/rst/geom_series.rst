@@ -1,6 +1,13 @@
+.. _geom_series:
 
+.. include:: /_static/includes/lecture_howto_py.raw
+
+.. index::
+    single: python
+    
+**********************
 Geometric series 101
---------------------
+**********************
 
 This notebook describes important sets of ideas in economics that rely
 on using the mathematics of geometric series
@@ -14,28 +21,28 @@ Among these are
 
 -  interest rates and present values of streams of payouts from assets
 
-These and other applications illustrate the wise crack that \*\* in
-economics, a little knowledge of geometric series goes a long way\*\*
+These and other applications illustrate the wise crack that **in
+economics, a little knowledge of geometric series goes a long way**
 
 Geometric series: key formulas
-------------------------------
+===============================
 
-To start, we let :math:`c`\ be a real number that lies strictly between
-:math:`-1` and\ :math:`1`
+To start, we let :math:`c` be a real number that lies strictly between
+:math:`-1` and :math:`1`
 
 -  We often write this as :math:`c \in (-1,1)`
 
--  here :math:`(-1,1)`\ denotes the collection of all real numbers that
+-  here :math:`(-1,1)` denotes the collection of all real numbers that
    are strictly less than :math:`1` and strictly greater
    than\ :math:`-1`
 
--  the symbol :math:`\in` means *in* or \*belongs to the following
-   set\*\*
+-  the symbol :math:`\in` means *in* or *belongs to the following
+   set*
 
 We want to evaluate geometric series of two types -- infinite and finite
 
 Infinite geometric series
-^^^^^^^^^^^^^^^^^^^^^^^^^
+--------------------------
 
 The first type of geometric that interests us is the infinite series
 
@@ -45,16 +52,19 @@ Where :math:`\cdots` means that the series contiues without limit.
 
 The key formula is
 
-.. math:: 1 + c + c^2 + c^3 + \cdots = \frac{1}{1 -c }   \quad \quad \quad  (0)
+.. math::
+  :label: infinite
+  
+  1 + c + c^2 + c^3 + \cdots = \frac{1}{1 -c }
 
-**How to prove key formula (0):**
+**How to prove key formula :eq:`infinite`:**
 
 Multiply both sides of the above equation by :math:`(1-c)` and verify
 that if :math:`c \in (-1,1)`, then the outcome is the
-equation\ :math:`1 = 1`.
+equation :math:`1 = 1`
 
 Finite geometric series
-^^^^^^^^^^^^^^^^^^^^^^^
+------------------------
 
 The second series that interests us is the finite geomtric series
 
@@ -67,11 +77,11 @@ The key formula here is
 .. math:: 1 + c + c^2 + c^3 + \cdots + c^T  = \frac{1 - c^{T+1}}{1-c}
 
 **Remark:** The above formula works for any value of the scalar
-:math:`c`. We don't have to restrict :math:`c`\ to be in the
-set\ :math:`(-1,1)`
+:math:`c`. We don't have to restrict :math:`c` to be in the
+set :math:`(-1,1)`
 
 Three Examples
-~~~~~~~~~~~~~~
+===============
 
 We now move on to describe some famuous economic applications of
 geometric series
@@ -111,7 +121,7 @@ customers
 A geometric series is a key tool for understanding how banks create
 money (i.e., deposits) in a fractional reserve system
 
-The geometric series formula (1) is at the heart of the classic model of
+The geometric series formula :eq:`infinite` is at the heart of the classic model of
 the money creation process -- one that leads us to the celebrated
 **money multiplier**
 
@@ -121,25 +131,29 @@ A simple model
 There is a set of banks named :math:`i = 0, 1, 2, \ldots`
 
 Bank :math:`i`'s loans :math:`L_i`, deposits :math:`D_i`, and
-reserves\ :math:`R_i` must satisfy the balance sheet equation (because
-**\`\`balance sheets balance''**):
+reserves :math:`R_i` must satisfy the balance sheet equation (because
+**balance sheets balance**):
 
-.. math:: L_i + R_i = D_i    \quad (1) 
+.. math:: L_i + R_i = D_i
 
 The left side of the above equation is the sum of the bank's **assets**,
-namely, the loans :math:`L_i`\ it has outstanding plus its reserves of
+namely, the loans :math:`L_i` it has outstanding plus its reserves of
 cash :math:`R_i`. The right side records bank :math:`i`'s liabilities,
-namely, the deposits\ :math:`D_i` held by its depositors; these are
+namely, the deposits :math:`D_i` held by its depositors; these are
 IOU's from the bank to its depositors in the form of either checking
 accounts or savings accounts (or before 1914, bank notes issued by a
 bank stating promises to redeem note for gold or silver on demand)
 
-Dongchen: is there a way to add a little balance sheet here? with assets on the left side and liabilities on the right side?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. TO REMOVE:
+.. Dongchen: is there a way to add a little balance sheet here? 
+.. with assets on the left side and liabilities on the right side?
 
 Ecah bank :math:`i` sets its reserves to satisfy the equation
 
-.. math:: R_i = r D_i  \quad (2) 
+.. math::
+  :label: reserves
+  
+  R_i = r D_i
 
 where :math:`r \in (0,1)` is its **reserve-deposit ratio** or **reserve
 ratio** for short
@@ -148,50 +162,62 @@ ratio** for short
    for precautionary reasons
 
 Next we add a theory stating that bank :math:`i+1`'s deposits depend
-entirely on loans made by bank\ :math:`i`, namely,
+entirely on loans made by bank :math:`i`, namely
 
-.. math:: D_{i+1} = L_i    \quad (3) 
+.. math:: 
+  :label: deposits
+  
+  D_{i+1} = L_i
 
 Thus, we can think of the banks as being arranged along a line with
 loans from bank :math:`i` being immediately deposited in :math:`i+1`
 
--  in this way, the debtors to bank :math:`i`\ become creditors of
-   bank\ :math:`i+1`
+-  in this way, the debtors to bank :math:`i` become creditors of
+   bank :math:`i+1`
 
 Finally, we add an *initial condition* about an exogenous level of bank
 :math:`0`'s deposits
 
-.. math:: D_0 \ \textrm {is given exogenously}  \quad (4) 
+.. math:: D_0 \ \text{ is given exogenously}
 
 We can think of :math:`D_0` as being the amount of cash that a first
 depositor put into the first bank in the system, bank number :math:`i=0`
 
 Now we do a little algebra
 
-Combining equations (1) and (2) tells us that
+Combining equations :eq:`reserves` and :eq:`deposits` tells us that
 
-.. math:: L_i = (1-r) D_i  \quad (5)
+.. math:: 
+  :label: fraction
+  
+  L_i = (1-r) D_i
 
-This states that bank :math:`i`\ loans a fraction :math:`(1-r)` of its
-deposits and keeps a fraction\ :math:`r` as cash reserves
+This states that bank :math:`i` loans a fraction :math:`(1-r)` of its
+deposits and keeps a fraction :math:`r` as cash reserves
 
-Combining equation (5) with equation (2) tells us that
+Combining equation :eq:`fraction` with equation :eq:`deposits` tells us that
 
-.. math:: D_{i+1} = (1-r) D_i  \ \ \textrm{for $i \geq 0$ }  \quad (6) 
+.. math:: D_{i+1} = (1-r) D_i  \ \text{ for } i \geq 0
 
 which implies that
 
-.. math:: D_i = (1 - r)^i D_0  \ \ \textrm{for $i \geq 0$ } \quad (7)
+.. math::
+  :label: geomseries
+  
+  D_i = (1 - r)^i D_0  \ \text{ for } i \geq 0
 
-Equation (7) expresses :math:`D_i`\ as the :math:`i`\ th term in the
-product of\ :math:`D_0` and the geometric series
+Equation :eq:`geomseries` expresses :math:`D_i` as the :math:`i` th term in the
+product of :math:`D_0` and the geometric series
 
 .. math::  1, (1-r), (1-r)^2, \cdots
 
 Therefore, the sum of all deposits in our banking system
 :math:`i=0, 1, 2, \ldots` is
 
-.. math:: \sum_{i=0}^\infty (1-r)^i D_0 =  \frac{D_0}{1 - (1-r)} = \frac{D_0}{r} \quad (8)
+.. math::
+  :label: sumdeposits
+  
+  \sum_{i=0}^\infty (1-r)^i D_0 =  \frac{D_0}{1 - (1-r)} = \frac{D_0}{r}
 
 **Money multiplier**
 
@@ -199,27 +225,25 @@ The **money multiplier** is a number that tells the multiplicative
 factor by which an exogenous injection of cash into bank :math:`0` leads
 to an increase in the total deposits in the banking system
 
-Equation (8) asserts that the **money multiplier** is
+Equation :eq:`sumdeposits` asserts that the **money multiplier** is
 :math:`\frac{1}{r}`
 
--  an initial deposit of cash of :math:`D_0`\ in bank\ :math:`0` leads
+-  an initial deposit of cash of :math:`D_0` in bank :math:`0` leads
    the banking system to create total deposits of :math:`\frac{D_0}{r}`
 
 -  The initial deposit :math:`D_0` is held as reserves, distributed
-   throughout the banking system according to
+   throughout the banking system according to :math:`D_0 = \sum_{i=0}^\infty R_i`
 
-   ::
+.. Dongchen: can you think of some simple Python examples that 
+.. illustrate how to create sequences and so on? Also, some simple 
+.. experiments like lowering reserve requirements? Or others you may suggest?
 
-       $$D_0 = \sum_{i=0}^\infty R_i$$    
-
-Dongchen: can you think of some simple Python examples that illustrate how to create sequences and so on? Also, some simple experiments like lowering reserve requirements? Or others you may suggest?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Keynesian multiplier
 --------------------
 
 Static version
-~~~~~~~~~~~~~~
+----------------
 
 The famous economist John Maynard Keynes and his followers created a
 simple model intended to determine national income :math:`y` in
@@ -238,7 +262,7 @@ of three equations that describe aggegate demand for :math:`y` and its
 components
 
 The first equation is a national income identity asserting that
-consumption :math:`c`\ plus investment\ :math:`i` equals national income
+consumption :math:`c` plus investment :math:`i` equals national income
 :math:`y`:
 
 .. math:: c+ i = y
@@ -249,7 +273,7 @@ people consume a fraction :math:`b \in (0,1)` of their income:
 .. math:: c = b y
 
 The fraction :math:`b \in (0,1)` is called the **marginal propensity to
-consume**.
+consume**
 
 The fraction :math:`1-b \in (0,1)` is called the **marginal propensity
 to save**
@@ -257,10 +281,10 @@ to save**
 The third equation simply states that investment is exogenous at level
 :math:`i`
 
--  *exogenous* means *determined outside this model*
+- *exogenous* means *determined outside this model*
 
-Substituting the second equation into the first gives $(1-b) y = i
-:math:`; solving this equation for`\ y$ gives
+Substituting the second equation into the first gives :math:`(1-b) y = i;
+ solving this equation for :math:`y` gives
 
 .. math:: y = \frac{1}{1-b} i  
 
@@ -291,8 +315,8 @@ consumption function to take time into account
 
 -  we add a one-period lag in how income affects consumption
 
-We let :math:`c_t`\ be consumption at time :math:`t` and :math:`i_t` be
-investment at time\ :math:`t`
+We let :math:`c_t` be consumption at time :math:`t` and :math:`i_t` be
+investment at time :math:`t`
 
 We modify our consumption function to assume the form
 
@@ -336,28 +360,30 @@ Evidently, as :math:`t \rightarrow + \infty`,
 .. math:: y_t \rightarrow \frac{1}{1-b} i 
 
 **Remark 1:** The above formula is often applied to assert that an
-exogenous increase in investment of :math:`\Delta i`\ at time\ :math:`0`
+exogenous increase in investment of :math:`\Delta i` at time :math:`0`
 ignites a dynamic process of increases in national income by amounts
 
 .. math:: \Delta i, (1 + b )\Delta i, (1+b + b^2) \Delta i , \cdots
 
  at times :math:`0, 1, 2, \ldots`
 
-| **Remark 2** Let :math:`g_t` be an exogenous sequence of government
-  expenditures.
-| If we generalize the model so that the national income identity
-  becomes
+**Remark 2** Let :math:`g_t` be an exogenous sequence of government
+expenditures
 
-  .. math:: c_t + i_t + g_t  = y_t
+If we generalize the model so that the national income identity
+becomes
 
-   then a version of the preceding argument shows that the **government
-  expenditures multiplier** is also :math:`\frac{1}{1-b}`, so that a
-  permanent increase in government expenditures ultimately leads to an
-  increase in national income equal to the multiplier times the increase
-  in government expenditures
+.. math:: c_t + i_t + g_t  = y_t
 
-Dongchen: can you think of some simple Python things to add to illustrate basic concepts, maybe the idea of a "difference equation" and how we solve it?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+then a version of the preceding argument shows that the **government
+expenditures multiplier** is also :math:`\frac{1}{1-b}`, so that a
+permanent increase in government expenditures ultimately leads to an
+increase in national income equal to the multiplier times the increase
+in government expenditures
+
+.. Dongchen: can you think of some simple Python things to add to 
+.. illustrate basic concepts, maybe the idea of a "difference equation" and how we solve it?
+
 
 Interest rates and present values
 ---------------------------------
@@ -370,19 +396,19 @@ indexes time
 
 We let :math:`r \in (0,1)` be a one-period **net nominal interest rate**
 
--  if the nominal interest rate is :math:`5`\ percent,
-   then\ :math:`r= .05`
+-  if the nominal interest rate is :math:`5` percent,
+   then :math:`r= .05`
 
 A one-period **gross nominal interest rate** :math:`R` is defined as
 
 .. math:: R = 1 + r \in (1, 2) 
 
--  if :math:`r=.05`, then\ :math:`R = 1.05`
+-  if :math:`r=.05`, then :math:`R = 1.05`
 
-**Remark:** The gross nominal interest rate :math:`R`\ is an **exchange
+**Remark:** The gross nominal interest rate :math:`R` is an **exchange
 rate** or **relative price** of dollars at between times :math:`t` and
 :math:`t+1`. The units of :math:`R` are dollars at time :math:`t+1` per
-dollar at time :math:`t`.
+dollar at time :math:`t`
 
 When people borrow and lend, they trade dollars now for dollars later or
 dollars later for dollars now
@@ -390,51 +416,57 @@ dollars later for dollars now
 The price at which these exchanges occur is the gross nominal interest
 rate
 
--  If I sell :math:`x`\ dollars to you today, you pay me\ :math:`R x`
+-  If I sell :math:`x` dollars to you today, you pay me :math:`R x`
    dollars tomorrow
 
--  This means that you borrowed :math:`x`\ dollars for me at a gross
-   interest rate :math:`R` and a net interest rate\ :math:`r`
+-  This means that you borrowed :math:`x` dollars for me at a gross
+   interest rate :math:`R` and a net interest rate :math:`r`
 
 We assume that the net nominal interest rate :math:`r` is fixed over
-time, so that\ :math:`R` is the gross nominal interest rate at times
+time, so that :math:`R` is the gross nominal interest rate at times
 :math:`t=0, 1, 2, \ldots`
 
 Two important geometric sequences are
 
-.. math:: 1, R, R^2, \cdots \quad (1)
+.. math:: 
+  :label: geom1
+  
+  1, R, R^2, \cdots
 
 and
 
-.. math:: 1, R^{-1}, R^{-2}, \cdots \quad (2)  
+.. math:: 
+  :label: geom2
+  
+  1, R^{-1}, R^{-2}, \cdots
 
-Sequence (1) tells us how dollar values of an investment **accumulate**
+Sequence :eq:`geom1` tells us how dollar values of an investment **accumulate**
 through time
 
-Sequence (2) tells us how to **discount** future dollars to get their
+Sequence :eq:`geom2` tells us how to **discount** future dollars to get their
 values in terms of today's dollars
 
 Accumulation
-~~~~~~~~~~~~
+-------------
 
-Geometric sequence (1) tells us how one dollar invested and re-invested
+Geometric sequence :eq:`geom1` tells us how one dollar invested and re-invested
 in a project with gross one period nominal rate of return accumulates
 
 -  here we assume that net interest payments are reinvested in the
    project
 
--  thus, :math:`1`\ dollar invested at time :math:`0` pays interest
+-  thus, :math:`1` dollar invested at time :math:`0` pays interest
    :math:`r` dollars after one period, so we have :math:`r+1 = R`
    dollars at time\ :math:`1`
 
--  at time :math:`1`\ we reinvest $1+r =R $ dollars and receive interest
+-  at time :math:`1` we reinvest :math:`1+r =R` dollars and receive interest
    of :math:`r R` dollars at time :math:`2` plus the *principal*
    :math:`R` dollars, so we receive :math:`r R + R = (1+r)R = R^2`
-   dollars at the end of period\ :math:`2`
+   dollars at the end of period :math:`2`
 
 -  and so on
 
-Evidently, if we invest :math:`x`\ dollars at time\ :math:`0` and
+Evidently, if we invest :math:`x` dollars at time :math:`0` and
 reinvest the proceeds, then the sequence
 
 .. math:: x , xR , x R^2, \cdots
@@ -442,57 +474,57 @@ reinvest the proceeds, then the sequence
 tells how our account accumulates at dates :math:`t=0, 1, 2, \ldots`
 
 Discounting
-~~~~~~~~~~~
+------------
 
-Geometric sequence (2) tells us how much future dollars are worth in
+Geometric sequence :eq:`geom2` tells us how much future dollars are worth in
 terms of today's dollars
 
-Remember that the units of :math:`R`\ are dollars at :math:`t+1` per
-dollar at\ :math:`t`
+Remember that the units of :math:`R` are dollars at :math:`t+1` per
+dollar at :math:`t`
 
 It follows that
 
--  the units of :math:`R^{-1}`\ are dollars at :math:`t` per dollar
+-  the units of :math:`R^{-1}` are dollars at :math:`t` per dollar
    at\ :math:`t+1`
 
--  the units of :math:`R^{-2}`\ are dollars at :math:`t` per dollar
+-  the units of :math:`R^{-2}` are dollars at :math:`t` per dollar
    at\ :math:`t+2`
 
--  and so on; the units of :math:`R^{-j}`\ are dollars at :math:`t` per
-   dollar at\ :math:`t+j`
+-  and so on; the units of :math:`R^{-j}` are dollars at :math:`t` per
+   dollar at :math:`t+j`
 
-So if someone has a claim on :math:`x`\ dollars at time :math:`t+j`, it
-is worth :math:`x R^{-j}` dollars at time\ :math:`t` (e.g., today)
+So if someone has a claim on :math:`x` dollars at time :math:`t+j`, it
+is worth :math:`x R^{-j}` dollars at time :math:`t` (e.g., today)
 
 Application to asset pricing
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------------
 
-A **lease** requires a payments stream of :math:`x_t`\ dollars at
-times\ :math:`t = 0, 1, 2, \ldots` where
+A **lease** requires a payments stream of :math:`x_t` dollars at
+times :math:`t = 0, 1, 2, \ldots` where
 
 .. math::  x_t = G^t x_0 
 
-where :math:`G = (1+g)`\ and\ :math:`g \in (0,1)`
+where :math:`G = (1+g)` and :math:`g \in (0,1)`
 
 Thus, lease payments increase at :math:`g` percent per period
 
 For a reason soon to be revealed, we assume that :math:`G < R`
 
-The \*\* present value\*\* of the lease is
+The **present value** of the lease is
 
 .. math::
 
-    \eqalign{ p_0  & = x_0 + x_1/R + x_2/(R^2) + \ddots \cr
-                     & = x_0 (1 + G R^{-1} + G^2 R^{-2} + \cdots )\cr
+    \eqalign{ p_0  & = x_0 + x_1/R + x_2/(R^2) + \ddots \\
+                     & = x_0 (1 + G R^{-1} + G^2 R^{-2} + \cdots ) \\
                      & = x_0 \frac{1}{1 - G R^{-1}} }
 
 where the last line uses the formula for an infinite geometric series
 
-Recall that :math:`R = 1+r`\ and :math:`G = 1+g` and that :math:`R > G`
+Recall that :math:`R = 1+r` and :math:`G = 1+g` and that :math:`R > G`
 and :math:`r > g` and that :math:`r` and\ :math:`g` are typically small
 numbers, e.g., .05 or .03
 
-Use the Taylor series of :math:`\frac{1}{1+r}`\ about\ :math:`r=0`,
+Use the Taylor series of :math:`\frac{1}{1+r}` about :math:`r=0`,
 namely,
 
 .. math:: \frac{1}{1+r} = 1 - r + r^2 - r^3 + \cdots
@@ -504,23 +536,27 @@ Use this approximation to write :math:`p_0` as
 
 .. math::
 
-    \eqalign{ p_0 & = x_0 \frac{1}{1 - G R^{-1}} \cr
-                     & = x_0 \frac{1}{1 - (1+g) (1-r) } \cr
-                     & = x_0 \frac{1}{1 - (1+g - r - rg)} \cr
-                     & \approx x_0 \frac{1}{r -g } } 
+    \begin{align} 
+    p_0 &= x_0 \frac{1}{1 - G R^{-1}} \\
+    &= x_0 \frac{1}{1 - (1+g) (1-r) } \\
+    &= x_0 \frac{1}{1 - (1+g - r - rg)} \\
+    & \approx x_0 \frac{1}{r -g }
+   \end{align}
 
- where the last step uses the approximation :math:`r g \approx 0`.
+where the last step uses the approximation :math:`r g \approx 0`
 
 The approximation
 
 .. math:: p_0 = \frac{x_0 }{r -g }
 
 is known as the **Gordon formula** for the present value or current
-price of an infinite payment stream :math:`x_0 G^t`\ when the nominal
-one-period interest rate is :math:`r` and when\ :math:`r > g`
+price of an infinite payment stream :math:`x_0 G^t` when the nominal
+one-period interest rate is :math:`r` and when :math:`r > g`
+
+
 
 Notes to Dongchen
------------------
+===================
 
 Hi. We can do various things with the above formulas --
 
