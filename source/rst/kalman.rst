@@ -97,7 +97,8 @@ This density :math:`p(x)` is shown below as a contour map, with the center of th
   from scipy import linalg
   import numpy as np
   import matplotlib.cm as cm
-  from matplotlib.mlab import bivariate_normal
+  #from matplotlib.mlab import bivariate_normal #
+  from scipy.stats import multivariate_normal
   import matplotlib.pyplot as plt
   %matplotlib inline
 
@@ -124,11 +125,13 @@ This density :math:`p(x)` is shown below as a contour map, with the center of th
 
   def gen_gaussian_plot_vals(μ, C):
       "Z values for plotting the bivariate Gaussian N(μ, C)"
-      m_x, m_y = float(μ[0]), float(μ[1])
-      s_x, s_y = np.sqrt(C[0, 0]), np.sqrt(C[1, 1])
-      s_xy = C[0, 1]
-      return bivariate_normal(X, Y, s_x, s_y, m_x, m_y, s_xy)
-      
+      mu = np.array([float(μ[0], float(μ[1])
+      #m_x, m_y = float(μ[0]), float(μ[1])
+      #s_x, s_y = np.sqrt(C[0, 0]), np.sqrt(C[1, 1])
+      #s_xy = C[0, 1]
+      cov = np.array(np.sqrt(C[0, 0]), C[0, 1], np.sqrt(C[1, 1], C[0, 1])
+      return multivariate_normal(X, mu, cov)
+
   # Plot the figure
 
   fig, ax = plt.subplots(figsize=(10, 8))
@@ -166,7 +169,7 @@ location :math:`y`
   cs = ax.contour(X, Y, Z, 6, colors="black")
   ax.clabel(cs, inline=1, fontsize=10)
   ax.text(float(y[0]), float(y[1]), "$y$", fontsize=20, color="black")
-  
+
   plt.show()
 
 
@@ -251,8 +254,8 @@ The original density is left in as contour lines for comparison
   ax.text(float(y[0]), float(y[1]), "$y$", fontsize=20, color="black")
 
   plt.show()
-  
-  
+
+
 
 Our new density twists the prior :math:`p(x)` in a direction determined by  the new
 information :math:`y - G \hat x`
@@ -360,7 +363,7 @@ the update has used parameters
   Z = gen_gaussian_plot_vals(x_hat, Σ)
   cs1 = ax.contour(X, Y, Z, 6, colors="black")
   ax.clabel(cs1, inline=1, fontsize=10)
-  
+
   # Density 2
   M = Σ * G.T * linalg.inv(G * Σ * G.T + R)
   x_hat_F = x_hat + M * (y - G * x_hat)
@@ -368,7 +371,7 @@ the update has used parameters
   Z_F = gen_gaussian_plot_vals(x_hat_F, Σ_F)
   cs2 = ax.contour(X, Y, Z_F, 6, colors="black")
   ax.clabel(cs2, inline=1, fontsize=10)
-  
+
   # Density 3
   new_x_hat = A * x_hat_F
   new_Σ = A * Σ_F * A.T + Q
@@ -377,9 +380,9 @@ the update has used parameters
   ax.clabel(cs3, inline=1, fontsize=10)
   ax.contourf(X, Y, new_Z, 6, alpha=0.6, cmap=cm.jet)
   ax.text(float(y[0]), float(y[1]), "$y$", fontsize=20, color="black")
-  
+
   plt.show()
-  
+
 
 
 
@@ -488,10 +491,10 @@ The class ``Kalman`` from the `QuantEcon.py`_ package implements the Kalman filt
 
     * the moments :math:`(\hat x_t, \Sigma_t)` of the current prior
 
-    * An instance of the `LinearStateSpace <https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/lss.py>`_ class from `QuantEcon.py <http://quantecon.org/python_index.html>`_ 
+    * An instance of the `LinearStateSpace <https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/lss.py>`_ class from `QuantEcon.py <http://quantecon.org/python_index.html>`_
 
 
-The latter represents a linear state space model of the form 
+The latter represents a linear state space model of the form
 
 .. math::
 
@@ -503,7 +506,7 @@ The latter represents a linear state space model of the form
 
 
 where the shocks :math:`w_t` and :math:`v_t` are iid standard normals
-    
+
 To connect this with the notation of this lecture we set
 
 .. math::
@@ -515,7 +518,7 @@ To connect this with the notation of this lecture we set
 
 * The class ``Kalman`` from the `QuantEcon.py <http://quantecon.org/python_index.html>`_ package has a number of methods, some that we will wait to use until we study more advanced applications in subsequent lectures
 
-* Methods pertinent for this lecture  are: 
+* Methods pertinent for this lecture  are:
 
     * ``prior_to_filtered``, which updates :math:`(\hat x_t, \Sigma_t)` to :math:`(\hat x_t^F, \Sigma_t^F)`
 
@@ -691,28 +694,28 @@ Exercise 1
     θ = 10  # Constant value of state x_t
     A, C, G, H = 1, 0, 1, 1
     ss = LinearStateSpace(A, C, G, H, mu_0=θ)
-    
+
     # == set prior, initialize kalman filter == #
     x_hat_0, Σ_0 = 8, 1
     kalman = Kalman(ss, x_hat_0, Σ_0)
-    
+
     # == draw observations of y from state space model == #
     N = 5
     x, y = ss.simulate(N)
     y = y.flatten()
-    
+
     # == set up plot == #
     fig, ax = plt.subplots(figsize=(10,8))
     xgrid = np.linspace(θ - 5, θ + 2, 200)
-    
+
     for i in range(N):
         # == record the current predicted mean and variance == #
         m, v = [float(z) for z in (kalman.x_hat, kalman.Sigma)]
         # == plot, update filter == #
         ax.plot(xgrid, norm.pdf(xgrid, loc=m, scale=np.sqrt(v)), label=f'$t={i}$')
         kalman.update(y[i])
-    
-    ax.set_title(f'First {N} densities when $\\theta = {θ:.1f}$') 
+
+    ax.set_title(f'First {N} densities when $\\theta = {θ:.1f}$')
     ax.legend(loc='upper left')
     plt.show()
 
@@ -723,35 +726,35 @@ Exercise 2
 .. code-block:: python3
 
     from scipy.integrate import quad
-    
+
     ϵ = 0.1
     θ = 10  # Constant value of state x_t
     A, C, G, H = 1, 0, 1, 1
     ss = LinearStateSpace(A, C, G, H, mu_0=θ)
-    
+
     x_hat_0, Σ_0 = 8, 1
     kalman = Kalman(ss, x_hat_0, Σ_0)
-    
+
     T = 600
     z = np.empty(T)
     x, y = ss.simulate(T)
     y = y.flatten()
-    
+
     for t in range(T):
         # Record the current predicted mean and variance, and plot their densities
         m, v = [float(temp) for temp in (kalman.x_hat, kalman.Sigma)]
-        
+
         f = lambda x: norm.pdf(x, loc=m, scale=np.sqrt(v))
         integral, error = quad(f, θ - ϵ, θ + ϵ)
         z[t] = 1 - integral
-        
+
         kalman.update(y[t])
-    
+
     fig, ax = plt.subplots(figsize=(9, 7))
     ax.set_ylim(0, 1)
     ax.set_xlim(0, T)
-    ax.plot(range(T), z) 
-    ax.fill_between(range(T), np.zeros(T), z, color="blue", alpha=0.2) 
+    ax.plot(range(T), z)
+    ax.fill_between(range(T), np.zeros(T), z, color="blue", alpha=0.2)
     plt.show()
 
 
@@ -762,52 +765,52 @@ Exercise 3
 
     from numpy.random import multivariate_normal
     from scipy.linalg import eigvals
-    
-    
+
+
     # === Define A, C, G, H === #
     G = np.identity(2)
     H = np.sqrt(0.5) * np.identity(2)
-    
-    A = [[0.5, 0.4], 
+
+    A = [[0.5, 0.4],
          [0.6, 0.3]]
     C = np.sqrt(0.3) * np.identity(2)
-    
+
     # === Set up state space mode, initial value x_0 set to zero === #
     ss = LinearStateSpace(A, C, G, H, mu_0 = np.zeros(2))
-    
+
     # === Define the prior density === #
-    Σ = [[0.9, 0.3], 
+    Σ = [[0.9, 0.3],
          [0.3, 0.9]]
     Σ = np.array(Σ)
     x_hat = np.array([8, 8])
-    
+
     # === Initialize the Kalman filter === #
     kn = Kalman(ss, x_hat, Σ)
-    
+
     # == Print eigenvalues of A == #
     print("Eigenvalues of A:")
     print(eigvals(A))
-    
+
     # == Print stationary Σ == #
     S, K = kn.stationary_values()
     print("Stationary prediction error variance:")
     print(S)
-    
+
     # === Generate the plot === #
     T = 50
     x, y = ss.simulate(T)
-    
+
     e1 = np.empty(T-1)
     e2 = np.empty(T-1)
-    
+
     for t in range(1, T):
         kn.update(y[:,t])
         e1[t-1] = np.sum((x[:, t] - kn.x_hat.flatten())**2)
         e2[t-1] = np.sum((x[:, t] - A @ x[:, t-1])**2)
-    
+
     fig, ax = plt.subplots(figsize=(9,6))
-    ax.plot(range(1, T), e1, 'k-', lw=2, alpha=0.6, label='Kalman filter error') 
-    ax.plot(range(1, T), e2, 'g-', lw=2, alpha=0.6, label='Conditional expectation error') 
+    ax.plot(range(1, T), e1, 'k-', lw=2, alpha=0.6, label='Kalman filter error')
+    ax.plot(range(1, T), e2, 'g-', lw=2, alpha=0.6, label='Conditional expectation error')
     ax.legend()
     plt.show()
 
