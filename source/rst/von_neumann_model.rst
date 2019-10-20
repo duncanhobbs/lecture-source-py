@@ -14,8 +14,8 @@ Von Neumann Growth Model (and a Generalization)
 **Co-author:** Balint Szoke
 
 This notebook uses the class ``Neumann`` to calculate key objects of a
-linear growth model of John von Neumann (1937) :cite:`von1937uber` that was generalized by
-Kemeny, Moregenstern and Thompson (1956) :cite:`kemeny1956generalization`.
+linear growth model of :cite:`von1937uber` that was generalized by
+:cite:`kemeny1956generalization`.
 
 Objects of interest are the maximal expansion rate (:math:`\alpha`), the
 interest factor (:math:`β`), and the optimal intensities (:math:`x`) and
@@ -55,8 +55,8 @@ The code below provides the ``Neumann`` class
 
       """
       This class describes the Generalized von Neumann growth model as it was
-      discussed in Kemeny et al. (1956, ECTA) :cite:`kemeny1956generalization`
-      and Gale (1960, Chapter 9.5) :cite:`gale1989theory`:
+      discussed in :cite:`kemeny1956generalization`
+      and Chapter 9.5 of :cite:`gale1989theory`:
 
       Let:
       n ... number of goods
@@ -140,7 +140,7 @@ The code below provides the ``Neumann`` class
       def bounds(self):
           """
           Calculate the trivial upper and lower bounds for alpha (expansion rate)
-          and beta (interest factor). See the proof of Theorem 9.8 in Gale (1960)
+          and beta (interest factor). See the proof of Theorem 9.8 in
           :cite:`gale1989theory`
           """
 
@@ -242,11 +242,11 @@ The code below provides the ``Neumann`` class
 
       def expansion(self, tol=1e-8, maxit=1000):
           """
-          The algorithm used here is described in Hamburger-Thompson-Weil
-          (1967, ECTA). It is based on a simple bisection argument and utilizes
-          the idea that for a given γ (= α or β), the matrix "M = B - γ * A"
-          defines a two-player zero-sum game, where the optimal strategies are
-          the (normalized) intensity and price vector.
+          The algorithm used here is described in :cite:`hamburger1967computation`.
+          It is based on a simple bisection argument and utilizes the idea that
+          for a given γ (= α or β), the matrix "M = B - γ * A" defines a
+          two-player zero-sum game, where the optimal strategies are the
+          (normalized) intensity and price vector.
 
           Outputs:
           --------
@@ -277,8 +277,8 @@ The code below provides the ``Neumann`` class
 
       def interest(self, tol=1e-8, maxit=1000):
           """
-          The algorithm used here is described in Hamburger-Thompson-Weil
-          (1967, ECTA). It is based on a simple bisection argument and utilizes
+          The algorithm used here is described in :cite:`hamburger1967computation`.
+          It is based on a simple bisection argument and utilizes
           the idea that for a given gamma (= alpha or beta),
           the matrix "M = B - γ * A" defines a two-player zero-sum game,
           where the optimal strategies are the (normalized) intensity and price
@@ -409,7 +409,7 @@ for all :math:`j\in S`, :math:`\exists i\in T`, s.t. :math:`b_{i,j}>0`.
 The economy is **irreducible** if there are no proper independent
 subsets.
 
-We study two examples, both coming from Chapter 9.6 of Gale (1960) :cite:`gale1989theory`
+We study two examples, both coming from Chapter 9.6 of :cite:`gale1989theory`
 
 .. code-block:: python3
 
@@ -572,13 +572,13 @@ For simplicity (and to emphasize a close connection to zero-sum games),
 in the following, we normalize both vectors
 :math:`x_0` and :math:`p_0` to have unit length.
 
-A standard duality argument (see Lemma 9.4. in (Gale, 1960) :cite:`gale1989theory`) implies
+A standard duality argument (see Lemma 9.4. in :cite:`gale1989theory`) implies
 that under Assumptions I and II, :math:`\beta_0\leq \alpha_0`.
 
 But in the other direction, that is :math:`\beta_0\geq \alpha_0`,
 Assumptions I and II are not sufficient.
 
-Nevertheless, von Neumann (1937) :cite:`von1937uber` proved the following remarkable
+Nevertheless, :cite:`von1937uber` proved the following remarkable
 “duality-type” result connecting TEP and EEP.
 
 **Theorem 1 (von Neumann):** If the economy :math:`(A,B)` satisfies
@@ -632,7 +632,7 @@ fact, it does not rule out (trivial) cases with :math:`x_0^TBp_0 = 0` so
 that nothing of value is produced.
 
 To exclude such uninteresting cases,
-Kemeny, Morgenstern and Thomspson (1956) add an extra requirement
+:cite:`kemeny1956generalization` add an extra requirement
 
 .. math:: x^T_0 B p_0 > 0
 
@@ -647,7 +647,7 @@ Interpretation as a Game Theoretic Problem (Two-player Zero-sum Game)
 =====================================================================
 
 To compute the equilibrium :math:`(\gamma^{*}, x_0, p_0)`, we follow the
-algorithm proposed by Hamburger, Thompson and Weil (1967), building on
+algorithm proposed by :cite:`hamburger1967computation`, building on
 the key insight that the equilibrium (with balanced growth) can be
 considered as a solution of a particular two-player zero-sum game.
 First, we introduce some notations.
@@ -683,11 +683,11 @@ two alternative interpretations:
   player will not get more than :math:`V(C)` (irrespective of what is the
   maximizing player’s choice)
 
-From the famous theorem of Nash (1951), it follows that there always
+From the famous theorem of :cite:`nash1951non', it follows that there always
 exists a mixed strategy Nash equilibrium for any *finite* two-player
 zero-sum game.
 
-Moreover, von Neumann’s Minmax Theorem (1928) :cite:`neumann1928theorie` implies that
+Moreover, von Neumann’s Minmax Theorem :cite:`neumann1928theorie` implies that
 
 .. math::
    V(C) = \max_x \min_p \hspace{2mm} x^T C p = \min_p \max_x \hspace{2mm} x^T C p = (x^*)^T C p^*
@@ -730,7 +730,7 @@ of view) is the *dual* LP
   \end{aligned}
 
 
-Hamburger, Thompson and Weil (1967) :cite:`hamburger1967computation` view the input-output pair of the
+:cite:`hamburger1967computation` view the input-output pair of the
 economy as payoff matrices of two-player zero-sum games. Using this
 interpretation, they restate Assumption I and II as follows
 
@@ -806,7 +806,7 @@ It is clear from the above argument that :math:`\beta_0`,
 :math:`\alpha_0` are the minimal and maximal :math:`\gamma` for which
 :math:`V(M(\gamma))=0`.
 
-Moreover, Hamburger et al. (1967) :cite:`hamburger1967computation` show that the
+:cite:`hamburger1967computation` show that the
 function :math:`\gamma \mapsto V(M(\gamma))` is continuous and
 nonincreasing in :math:`\gamma`.
 
@@ -817,7 +817,7 @@ input-output pair :math:`(A, B)`.
 Algorithm
 ---------
 
-Hamburger, Thompson and Weil (1967) :cite:`hamburger1967computation` propose a simple bisection algorithm
+:cite:`hamburger1967computation` propose a simple bisection algorithm
 to find the minimal and maximal roots (i.e. :math:`\beta_0` and
 :math:`\alpha_0`) of the function :math:`\gamma \mapsto V(M(\gamma))`.
 
@@ -975,7 +975,7 @@ with :math:`M(\gamma^*)` zero. (see the figure above).
 
 Indeed, although the von Neumann theorem assures existence of the
 equilibrium, Assumptions I and II are not sufficient for uniqueness.
-Nonetheless, Kemeny et al. (1967) show that there are at most finitely
+Nonetheless, :cite:`hamburger1967computation`. show that there are at most finitely
 many economic solutions, meaning that there are only finitely many
 :math:`\gamma^*` that satisfy :math:`V(M(\gamma^*)) = 0` and
 :math:`x_0^TBp_0 > 0` and that for each such :math:`\gamma^*_i`, there
@@ -983,7 +983,7 @@ is a self-sufficient part of the economy (a sub-economy) that in
 equilibrium can expand independently with the expansion
 coefficient :math:`\gamma^*_i`.
 
-The following theorem (see Theorem 9.10. in Gale, 1960 :cite:`gale1989theory`) asserts that
+The following theorem (see Theorem 9.10. in :cite:`gale1989theory`) asserts that
 imposing irreducibility is sufficient for uniqueness of
 :math:`(\gamma^*, x_0, p_0)`.
 
