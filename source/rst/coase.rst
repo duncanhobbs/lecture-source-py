@@ -124,7 +124,7 @@ Here's a summary of our discussion:
 A Quantitative Interpretation
 -----------------------------
 
-Coases ideas were expressed verbally, without any mathematics.
+Coase's ideas were expressed verbally, without any mathematics.
 
 In fact, his essay is a wonderful example of how far you can get with clear thinking and plain English.
 
